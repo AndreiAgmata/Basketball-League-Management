@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+
 import { Container, Form, Card, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function AddTeam() {
   const [team, setTeam] = useState({ teamName: "", location: "" });
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleSubmit = evt => {
