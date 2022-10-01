@@ -29,11 +29,10 @@
   height: 50%;
 }
 
-.player-buttons {
+.buttons {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 
 .edit-button {
@@ -62,4 +61,14 @@
 
 .team-info {
   padding-left: 10px;
+}
+
+.update-add-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.add-button {
+  margin-bottom: 10px;
 }

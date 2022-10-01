@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 function Team() {
@@ -36,6 +38,26 @@ function Team() {
       });
   }, [id]);
 
+  function handleDelete() {
+    fetch(
+      `https://young-plains-78622.herokuapp.com/api/team/${team.teamName}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then(response => response.json())
+      .then(json => {
+        alert("Team has been removed!");
+        navigate(`/teams`);
+      })
+      .catch(err => {
+        console.log(`Error ${err}`);
+      });
+  }
+
   if (!loading) {
     if (team) {
       return (
@@ -53,6 +75,24 @@ function Team() {
                   <h1 className="display-1">
                     <b>{team.teamName}</b>
                   </h1>
+                  <div className="buttons">
+                    <Button
+                      className="edit-button"
+                      variant="outline-dark"
+                      onClick={() => {
+                        navigate(`/team/edit/${team.teamName}`);
+                      }}
+                    >
+                      <FaEdit />
+                    </Button>
+                    <Button
+                      className="delete-button"
+                      variant="outline-danger"
+                      onClick={handleDelete}
+                    >
+                      <RiDeleteBin5Fill />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </Container>

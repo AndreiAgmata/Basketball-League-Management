@@ -3,31 +3,21 @@ import { useParams } from "react-router-dom";
 import { Container, Form, Card, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function EditPlayer() {
-  const [loading, setLoading] = useState(true);
-  const [player, setPlayer] = useState(null);
+function AddPlayer() {
+  const [player, setPlayer] = useState({
+    firstName: "",
+    lastName: "",
+    jerseyNumber: null,
+    position: "",
+    teamName: "",
+  });
   const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState([]);
   const navigate = useNavigate();
-  let { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://young-plains-78622.herokuapp.com/api/player/${id}`)
-      .then(response => {
-        return response.json();
-      })
-      .then(res => {
-        setLoading(false);
-        if (res.hasOwnProperty("_id")) {
-          setPlayer(res);
-        } else {
-          setPlayer(null);
-        }
-      });
-  }, [id]);
 
-  useEffect(() => {
-    setLoading(true);
     fetch(
       `https://young-plains-78622.herokuapp.com/api/teams?page=1&perPage=15`
     )
@@ -43,8 +33,8 @@ function EditPlayer() {
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    fetch(`https://young-plains-78622.herokuapp.com/api/player/${player._id}`, {
-      method: "PUT",
+    fetch(`https://young-plains-78622.herokuapp.com/api/player`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -52,8 +42,8 @@ function EditPlayer() {
     })
       .then(response => response.json())
       .then(json => {
-        alert("Player Informartion has been updated!");
-        navigate(`/player/${player._id}`);
+        alert("Player has been added!");
+        navigate(`/players`);
       })
       .catch(err => {
         console.log(`Error ${err}`);
@@ -61,14 +51,14 @@ function EditPlayer() {
   };
 
   if (!loading) {
-    if (player) {
+    if (teams) {
       return (
         <>
           <Container>
             <Card>
               <Card.Body>
                 <Card.Title>
-                  <h2>Edit Player Details</h2>
+                  <h2>Enter Player Details</h2>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -168,8 +158,9 @@ function EditPlayer() {
                   </Form.Group>
                 </Col>
               </Row>
-
-              <Button type="submit">Update</Button>
+              <div className="update-add-button">
+                <Button type="submit">Add Player</Button>
+              </div>
             </Form>
           </Container>
         </>
@@ -178,4 +169,4 @@ function EditPlayer() {
   }
 }
 
-export default EditPlayer;
+export default AddPlayer;

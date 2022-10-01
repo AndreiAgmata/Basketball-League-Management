@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Table, Pagination, Container } from "react-bootstrap";
+import { Card, Table, Pagination, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Teams() {
@@ -68,6 +68,16 @@ function Teams() {
               </tbody>
             </Table>
 
+            <Button
+              className="add-button"
+              variant="outline-primary"
+              onClick={() => {
+                navigate(`/team/add`);
+              }}
+            >
+              Add Team
+            </Button>
+
             <Pagination>
               <Pagination.Prev onClick={previousPage} />
               <Pagination.Item>{page}</Pagination.Item>
@@ -76,7 +86,43 @@ function Teams() {
           </Container>
         </>
       );
+    } else {
+      return (
+        <>
+          <Container>
+            <Card>
+              <Card.Body>
+                <Card.Title>Teams</Card.Title>
+                <Card.Text>There are no teams active in the League</Card.Text>
+              </Card.Body>
+            </Card>
+          </Container>
+          <br />
+          <Button
+            className="add-button"
+            variant="outline-primary"
+            onClick={() => {
+              navigate(`/team/add`);
+            }}
+          >
+            Add Team
+          </Button>
+        </>
+      );
     }
+  } else {
+    return (
+      <>
+        <Container>
+          <Card>
+            <Card.Body>
+              <Card.Title>Teams</Card.Title>
+              <Card.Text>Loading Teams...</Card.Text>
+            </Card.Body>
+          </Card>
+        </Container>
+      </>
+    );
   }
 }
 

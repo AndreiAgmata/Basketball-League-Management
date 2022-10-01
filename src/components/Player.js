@@ -27,6 +27,24 @@ function Player() {
       });
   }, [id]);
 
+  function handleDelete() {
+    fetch(`https://young-plains-78622.herokuapp.com/api/player/${player._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(player),
+    })
+      .then(response => response.json())
+      .then(json => {
+        alert("Player has been removed!");
+        navigate(`/players`);
+      })
+      .catch(err => {
+        console.log(`Error ${err}`);
+      });
+  }
+
   if (!loading) {
     if (player) {
       return (
@@ -60,7 +78,7 @@ function Player() {
                       </h3>
                     </Col>
                   </Row>
-                  <div className="player-buttons">
+                  <div className="buttons">
                     <Button
                       className="edit-button"
                       variant="outline-dark"
@@ -70,7 +88,11 @@ function Player() {
                     >
                       <FaEdit />
                     </Button>
-                    <Button className="delete-button" variant="outline-danger">
+                    <Button
+                      className="delete-button"
+                      variant="outline-danger"
+                      onClick={handleDelete}
+                    >
                       <RiDeleteBin5Fill />
                     </Button>
                   </div>
@@ -81,9 +103,7 @@ function Player() {
             <br />
             <Card>
               <Card.Body>
-                <Card.Text>
-                  <div className=" stats-text">Stats Coming Soon</div>
-                </Card.Text>
+                <Card.Text>Stats Coming Soon!</Card.Text>
               </Card.Body>
             </Card>
           </div>

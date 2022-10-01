@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Table, Pagination, Container } from "react-bootstrap";
+import { Card, Table, Pagination, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Players() {
@@ -91,6 +91,16 @@ function Players() {
               </tbody>
             </Table>
 
+            <Button
+              className="add-button"
+              variant="outline-primary"
+              onClick={() => {
+                navigate(`/player/add`);
+              }}
+            >
+              Add Player
+            </Button>
+
             <Pagination>
               <Pagination.Prev onClick={previousPage} />
               <Pagination.Item>{page}</Pagination.Item>
@@ -99,7 +109,43 @@ function Players() {
           </Container>
         </>
       );
+    } else {
+      return (
+        <>
+          <Container>
+            <Card>
+              <Card.Body>
+                <Card.Title>Players</Card.Title>
+                <Card.Text>There are no players active in the League</Card.Text>
+              </Card.Body>
+            </Card>
+            <br />
+            <Button
+              className="add-button"
+              variant="outline-primary"
+              onClick={() => {
+                navigate(`/player/add`);
+              }}
+            >
+              Add Player
+            </Button>
+          </Container>
+        </>
+      );
     }
+  } else {
+    return (
+      <>
+        <Container>
+          <Card>
+            <Card.Body>
+              <Card.Title>Players</Card.Title>
+              <Card.Text>Loading PLayers...</Card.Text>
+            </Card.Body>
+          </Card>
+        </Container>
+      </>
+    );
   }
 }
 
