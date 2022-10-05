@@ -35,6 +35,7 @@ function EditTeam() {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(team),
       }
     )
@@ -56,30 +57,15 @@ function EditTeam() {
             <Card>
               <Card.Body>
                 <Card.Title>
-                  <h2>Edit Team Details</h2>
+                  <h2>Edit Details</h2>
                 </Card.Title>
               </Card.Body>
             </Card>
 
             <br />
-
+            <h3>{team.teamName}</h3>
             <Form onSubmit={handleSubmit}>
               <Row>
-                <Col>
-                  <Form.Group className="mb-3" name="teamName">
-                    <Form.Label>Team Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={team.teamName}
-                      onChange={evt => {
-                        setTeam({
-                          ...team,
-                          teamName: evt.target.value,
-                        });
-                      }}
-                    />
-                  </Form.Group>
-                </Col>
                 <Col>
                   <Form.Group className="mb-3" name="location">
                     <Form.Label>Team Location</Form.Label>

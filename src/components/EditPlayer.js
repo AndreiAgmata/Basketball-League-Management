@@ -74,40 +74,11 @@ function EditPlayer() {
             </Card>
 
             <br />
+            <h3>
+              {player.firstName} {player.lastName}
+            </h3>
 
             <Form onSubmit={handleSubmit}>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3" name="firstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={player.firstName}
-                      onChange={evt => {
-                        setPlayer({
-                          ...player,
-                          firstName: evt.target.value,
-                        });
-                      }}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3" name="lastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      defaultValue={player.lastName}
-                      onChange={evt => {
-                        setPlayer({
-                          ...player,
-                          lastName: evt.target.value,
-                        });
-                      }}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
               <Row>
                 <Col>
                   <Form.Group className="mb-3" id="jerseyNumber">
